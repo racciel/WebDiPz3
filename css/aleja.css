@@ -1,0 +1,122 @@
+body {
+        background-color: aliceblue;
+}
+body {
+        background-color: lightslategray;
+}
+
+#zaglavljePocetne {
+    text-align: center;
+}
+
+.poveznica, ol, ul {
+    font-weight: bolder;
+}
+
+.navigacija .poveznica {
+    color: green;
+}
+
+header {
+    background-color: lavender;
+    color: darkcyan;
+    width: 100%;
+    height: 40px;
+}
+
+a[href="#tijelo"] {
+    float: left;
+}
+
+
+a[href="#zaglavlje"] {
+    float: right;
+}
+
+
+h1, body {
+    margin: 0;
+}
+
+table {
+    border: 2px solid whitesmoke;
+    border-collapse: collapse;
+}
+
+h1 {
+    display: inline;
+}
+
+header a {
+    color: chocolate;
+    text-decoration: none;
+}
+
+nav a {
+    color: chocolate;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+    background-color: lavender;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    border: 2px solid black;
+}
+
+#zaglavlje:target + nav {
+    display: block;
+}
+
+#tijelo:target > nav {
+    display: none;
+}
+
+nav {
+    display: none;
+}
+
+.animacija {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.animacija img {
+    position: absolute;
+    width: 200px;
+    animation: slajdanje 10s infinite;
+    left: 200px;
+    
+}
+
+@keyframes slajdanje {
+    0%{
+        left: 200px;
+    }
+    25% {
+        left: 0;
+    }
+    50% {
+        left: -200px;
+    }
+}
+
+#slika1 {
+    animation-delay: 2.5s;
+}
+
+@media only screen and (min-width: 390px) and (max-width: 500px) {
+    nav {
+        width: 70%;
+    }
+    
+    ul li{
+        text-align: center;
+    }
+}

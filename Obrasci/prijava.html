@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="hr">
+    <head>
+        <title>Andreasova stranica</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Andreas Leja">
+        <meta name="description" content="Vjezbe02">
+        <meta name="keywords" content="HTML, CSS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            body{
+                background-color: slategray;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="css/aleja.css">
+        <script src="../js/aleja.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <header id="zaglavljePocetne">
+            <h1 style="font-size: 72px; color:tomato;">Početna stranica</h1>
+            <img src="materijali/foi-logo.jpg" usemap="#mapa2" alt="FOI logo" width="200" height="200">
+            <map name="mapa2">
+                <area href="multimedija.html" shape="circle" coords="150, 75 10" alt="pocetna">
+            </map>
+            <div id="timer">
+                
+            </div>
+        </header>
+        <nav class="navigacija">
+            <a class="poveznica" href="prijava.html">Početna stranica</a>
+            <a class="poveznica" href="multimedija.html">Multimedija</a>
+        </nav>
+        
+        <main>
+            <div id="greske"></div>
+            <form id="formaPrijava" novalidate method="post" name="form1" action="http://barka.foi.hr/WebDiP/2021/materijali/zadace/ispis_forme.php">
+            <p>
+                <input name="onemogucen" type="number" disabled value="1">
+                
+                <label for="datoteka">Naziv: </label>
+                <input type="file" id="datoteka" name="datoteka"><br>
+                
+                <label for="izbornik">Lozinka: </label>
+                    <select>
+                        <option>opcija 1</option>
+                        <option>opcija 2</option>
+                        <option>opcija 3</option>
+                        <option>opcija 4</option>
+                    </select>
+                <br>
+                
+                <label for="broj">Broj: </label>
+                <input type="number" id="broj" name ="broj" value="18" min="18" max="255"><br>
+                Ime:<input type="text" id="ime"><br>
+                Lozinka:<input type="password" id="lozinka"><br>
+                <input type="hidden" name="skriveni" value="10000"><br>
+                
+                <input type="checkbox" name="vozac[]" value="1"> Upamti korisničko ime<br>
+                
+                <input id="submitPrijava" type="submit" value=" Prijavi se ">
+                <input type="reset" value=" Inicijaliziraj "> 
+            </p>
+            </form>
+            
+        </main>
+        
+        <footer>
+            <address>
+                <a class="poveznica" href="mailto:aleja@foi.hr">aleja@foi.hr</a><br>
+                &copy; A. Leja 2022
+            </address>
+        </footer>
+    </body>
+</html>

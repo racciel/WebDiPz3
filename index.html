@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="hr">
+    <head>
+        <title>Andreasova stranica</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Andreas Leja">
+        <meta name="description" content="Vjezbe02">
+        <meta name="keywords" content="HTML, CSS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            body{
+                background-color: slategray;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="css/aleja.css">
+        <script type="text/javascript">
+            // alert("Hello world!");
+            var broj1 = 2;
+            var broj2 = 1;
+            
+            var niz = [1,2,3,4];
+            
+            for(var i = 0; i < niz.length; i++)
+                if(niz[i] % 2 == 0)
+                    console.log(niz[i]);
+            
+            console.log(1=="1");
+            console.log(1==="1");
+            console.log(2!=="2");
+            
+            var nizdrugi = [];
+            nizdrugi["predmet"] = "IWA";
+            nizdrugi["ime"] = "Andreas";
+            nizdrugi["prezime"] = "Leja";
+            
+            for(var i in nizdrugi){
+                console.log(i + " " + nizdrugi[i]);
+            }
+            
+        </script>
+        <script src="../js/aleja.js"></script>
+    </head>
+    <body id="tijelo">
+        <header id="zaglavlje">
+            
+            <a href="#tijelo">
+                <img src="materijali/foi-logo.jpg" alt="FOI logo" width="20" height="20">
+                <h1>Popis</h1>
+            </a>
+            
+            <a href="#zaglavlje">
+                <img src="materijali/menu.png" alt="Menu icon" width="30" height="30">
+            </a>
+            
+        </header>
+        
+        <nav class="navigacija">
+            <ul>
+                <li>
+                    <a href="index.html">
+                        Početna stranica
+                    </a>
+                </li>
+                <li>
+                    <a href="multimedija.html">
+                        Multimedija
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <main>
+            <div class="animacija">
+                <img id="slika1" src="materijali/foi-logo.jpg" alt="FOI logo">
+                <img id="slika2" src="materijali/menu.png" alt="Menu icon">
+            </div>
+        </main>
+        
+        <footer>
+            <address>
+                <a class="poveznica" href="mailto:aleja@foi.hr">aleja@foi.hr</a><br>
+                &copy; A. Leja 2022
+            </address>
+        </footer>
+    </body>
+</html>
