@@ -8,7 +8,7 @@
     <meta name="author" content="Andreas Leja">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/aleja.css">
-    <title>Prijava</title>
+    <title>Registracija</title>
 </head>
     <body id="tijelo">
         <header id="zaglavlje">
@@ -16,7 +16,7 @@
             <a href="#tijelo">
                 
                 <div class="naslov">
-                    <h1>Prijava</h1>
+                    <h1>Registracija</h1>
                 </div>
                 
             </a>
@@ -50,8 +50,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./registracija.html">
-                        Registracija
+                    <a href="./prijava.html">
+                        Prijava
                     </a>
                 </li>
                 <li>
@@ -68,16 +68,22 @@
         </nav>
         
         <main>
-            <div class="obrazac_prijave">
-                <form method="post" action="http://barka.foi.hr/WebDiP/2021/materijali/zadace/ispis_forme.php">
-                    <label for="korime">Korisničko ime: </label><input type="text" name="korime" id="korime" maxlength="25" required><br><br>
-                    <label for="lozinka">Lozinka: </label><input type="password" name="lozinka" id="lozinka" maxlength="50" required><br><br>
-                    <label>Zapamti me: </label>
-                    <input type="radio" name="remember" id="da" value="yes"><label for="da">Da</label> 
-                    <input type="radio" name="remember" id="ne" value="no" checked><label for="ne">Ne</label><br><br>
-                    <a href="../index.html">Zaboravljena lozinka?</a><br><br>
-                    <input type="submit" value="POŠALJI">
+            <div class="obrazac_registracije">
+                <form method="get" action="http://barka.foi.hr/WebDiP/2021/materijali/zadace/ispis_forme.php" id="rega">
+                    <label for="imeiprezime">Ime i prezime: </label><input type="text" id="imeiprezime" name="imeiprezime" autofocus required><br><br>
+                    <label for="godinarod">Godina rođenja: </label><input type="date" id="godinarod" name="godinarod" required><br><br>
+                    <label for="mail">E-mail: </label><input type="email" placeholder="ldap@foi.hr" id="mail" name="mail" required><br><br>
+                    <label for="korime">Korisničko ime: </label><input type="text" id="korime" name="korime" maxlength="25" required><br><br>
+                    <label for="lozinka">Lozinka: </label><input type="password" id="lozinka" name="lozinka" maxlength="50" required><br><br>
+                    <label for="plozinka">Potvrda lozinke: </label><input type="password" id="plozinka" name="plozinka" maxlength="50" required><br><br>
+                    <label for="kolacici">Kolačići: </label>
+                    <select name="kolacici" id="kolacici">
+                        <option value="0">nužni</option>
+                        <option value="1">marketinški</option>
+                        <option value="2">analitički</option>
+                    </select><br><br>
                 </form>
+                <input type="submit" form="rega" value="POŠALJI">
             </div>
         </main>
         
@@ -85,7 +91,7 @@
             <address>
                 Godina izrade: 2022<br>
                 Izradio: &copy; <a class="poveznica" href="mailto:aleja@foi.hr">Andreas Leja</a><br>
-                <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fbarka.foi.hr%2FWebDiP%2F2021%2Fzadaca_02%2Faleja%2Fobrasci%2Fprijava.html">
+                <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fbarka.foi.hr%2FWebDiP%2F2021%2Fzadaca_02%2Faleja%2Fobrasci%2Fregistracija.html">
                     <img src="../materijali/HTML5.png" alt="HTM5" height="60" width="60">
                 </a>
                 <a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fbarka.foi.hr%2FWebDiP%2F2021%2Fzadaca_02%2Faleja%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en">
@@ -95,3 +101,4 @@
         </footer>
     </body>
 </html>
+
