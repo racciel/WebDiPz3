@@ -75,36 +75,36 @@
 
             </div>
                 <form method="post" id="formaObrazac" action="http://barka.foi.hr/WebDiP/2021/materijali/zadace/ispis_forme.php">
-                    <label for="korime">ID: </label><input type="number" name="korime" id="korime" value="1" disabled ><br><br>
-                    <label for="naziv">Naziv: </label><input type="file" name="naziv" id="naziv" ><br><br>
+                    <label for="korime">ID: </label><input type="number" name="korime" id="korime" value="1" disabled >
+                    
+                    <label for="naziv">Naziv: </label><input type="file" name="naziv" id="naziv" required>
                     <label for="kategorija">Kategorija: </label>
-                    <input type="text" name="kategorija" id="kategorija" list="lista" >
+                    <input type="text" name="kategorija" id="kategorija" list="lista" required>
                     <datalist id="lista">
                         <option> MBTI</option>
                         <option> Enneagram</option>
-                        <option> Hogwartz</option>
+                        <option> Hogwarts</option>
                         <option> DISC</option>
-                    </datalist><br><br>
+                    </datalist>
                     <label for="datvrijeme">Datum i vrijeme: </label>
-                    <input type="text" name="datvrijeme" id="datvrijeme" ><br><br>
-                    <label for="opis">Opis: </label><br>
-                    <textarea name="opis" id="opis" placeholder="Unesite opis..." ></textarea><br><br>
+                    <input type="text" name="datvrijeme" id="datvrijeme" required>
+                    <label for="opis">Opis: </label>
+                    <textarea name="opis" id="opis" placeholder="Unesite opis..." required></textarea>
                     <input type="hidden" value="1000000">
                     
-                    <br><br>
-                    <label>Boja teme: </label><input type="color"><br><br>
-                    <label>Alergije: </label><br>
+
+                    <label>Boja teme: </label><input type="color">
+                    <label>Alergije: </label>
                     <input type="checkbox" name="orplodovi" id="orplodovi" value="orasasti">
-                    <label for="orplodovi">Orašasti plodovi</label><br>
+                    <label for="orplodovi">Orašasti plodovi</label>
                     <input type="checkbox" name="agrumi" id="agrumi" value="agrumi">
-                    <label for="agrumi">Agrumi</label><br>
+                    <label for="agrumi">Agrumi</label>
                     <input type="checkbox" name="laktoza" id="laktoza" value="laktoza">
-                    <label for="laktoza">Laktoza</label><br>
+                    <label for="laktoza">Laktoza</label>
                     <input type="checkbox" name="gluten" id="gluten" value="gluten">
-                    <label for="gluten">Gluten</label><br>
-                    <br><br><br>
-                    <input type="button" name="gumb" value="BESKORISTAN GUMB"><br><br>
-                    <input type="reset" value="RESETIRAJ"><br><br>
+                    <label for="gluten">Gluten</label>
+                    <input type="button" name="gumb" value="BESKORISTAN GUMB">
+                    <input type="reset" value="RESETIRAJ">
 
 
                     <input type="submit" value="POŠALJI">
