@@ -1,65 +1,3 @@
-/*function ucitavanjeStranice() {
-    pokreniTimer();
-    var formaPrijava = document.getElementById("formaPrijava");
-    formaPrijava.addEventListener("submit", function(event){
-        alert("Broj elemenata je: " + formaPrijava.length);
-        if(document.getElementById("ime").value == ""){
-            alert("Ime je prazno");
-        }
-        else if(document.getElementById("lozinka").value == ""){
-            alert("Lozinka je prazna");
-        }
-        else {
-            alert("Unijeli ste sve podatke!");
-        }
-        document.getElementById("greske").innerHTML = "";
-        for (var i in formaPrijava){
-            if(formaPrijava[i].value === ""){
-                document.getElementById("greske").innerHTML +=  formaPrijava[i].id + " je prazno!<br>";
-                formaPrijava[i].style = "color: white; background-color: salmon;";
-            }
-            event.preventDefault();
-        }
-    }
-);
-    console.log(formaPrijava);
-}
-
-document.addEventListener("DOMContentLoaded", ucitavanjeStranice);
-
-var sekunde = 0;
-var minute = 0;
-var vrijeme = "";
-var timer;
-
-function pokreniTimer() {
-    sekunde++;
-    minute = (sekunde>59?minute++:minute);
-    if(sekunde>59){
-        sekunde = 0;
-    }
-    if(minute<10){
-        vrijeme = "0" + minute + ":";
-    }
-    else{
-        vrijeme = minute + ":";
-    }
-    
-    if(sekunde<10){
-        vrijeme += "0" + sekunde;
-    }
-    else{
-        vrijeme += sekunde;
-    }
-    document.getElementById("timer").innerHTML = vrijeme;
-    timer = setTimeout("pokreniTimer()", 1000);
-}
-
-function zaustaviTimer(){
-    clearTimeout(timer);
-}
-*/
-
 var greske = [false, false, false, false, false, false, false];
 var brojacGresakaUTekstu = 0;
 var orijentacija;
@@ -197,6 +135,7 @@ function ucitaj() {
 
 }
 
+// ovo nije odbrojavanje nego brojanje iz nekog JEBENOG razloga
 var minute = 10;
 var sekunde = 0;
 
@@ -303,7 +242,7 @@ function promijeniOrijentaciju() {
             forma[i].style.display = "cell";
             forma[i].style = "";
         }
-        document.getElementsByClassName("obrazac_prikaza")[0].style.width = "90%";
+        document.getElementsByClassName("obrazac_prikaza")[0].style.width = "95%";
     }
     else {
         for(let i = 0; i < forma.length; i++) {
@@ -311,11 +250,84 @@ function promijeniOrijentaciju() {
             forma[i].style.margin = "5px auto";
         }
         document.getElementsByClassName("obrazac_prikaza")[0].style.width = "30%";
-    }
-
-    
+    }    
 }
 
 
 
-document.addEventListener("DOMContentLoaded", ucitaj);
+
+function ucitajMulimediju() {
+    const pretraga = $("#trazi");
+    $("#problem").hide();
+    pretraga.on('keyup', prijedlog);
+}
+
+
+function prijedlog() {
+    const pretraga = $("#trazi");
+    const problemMsg = $("#problem");
+
+    let izvor = [];
+
+    $.ajax({
+        type: "GET",
+        url: "./json/search.json",
+        contentType: "application/json",
+        dataType: "json",
+        success: function(odgovor){
+            for(let i = 0; i<odgovor.length; i++){
+                izvor.push(odgovor[i]);
+            }
+        },
+        error: function(odgovor){
+            console.log(odgovor);
+        }
+    });
+
+    pretraga.autocomplete({
+        source: izvor,
+      });
+
+    let svi = $("[title]");
+    let pogodak = false;
+
+    for(let i = 0; i < svi.length; i++){
+        if(svi[i].title.includes(pretraga.val())) {
+            svi[i].style = "display: block";
+            pogodak = true;
+        }
+        else{
+            svi[i].style = "display: none";
+        }
+    }
+
+    if(!pogodak) {
+        problemMsg.show();
+    }
+    else {
+        problemMsg.hide();
+    }
+
+}
+
+
+function ucitajPopis() {
+    // TREBA DORADITI
+    if($.cookie){
+
+    }
+    else {
+        
+    }
+
+}
+
+
+if(document['title'] == "Obrazac")
+    document.addEventListener("DOMContentLoaded", ucitaj);
+
+if(document['title'] == "Multimedija")
+    document.addEventListener("DOMContentLoaded", ucitajMulimediju);
+
+if(document['title'] == "Popis")
+    document.addEventListener("DOMContentLoaded", ucitajPopis);
