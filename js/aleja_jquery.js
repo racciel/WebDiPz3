@@ -180,15 +180,14 @@ function odabraniDatumVrijeme(dohvaceno, aidi) {
                 let dateTime = Date.parse($(this).find('dateTime').text());
                 let retultat = new Date(dateTime);
                 let dani = 0;
-                if(found !== 0){
+                if(found != 0){
                     dani = prompt("Unesite X dana!");
                     retultat.setDate(retultat.getDate() + dani);
-                    $("#"+aidi[0]).html(retultat);
+                    $("#"+aidi).html(retultat);
                     document.cookie = 'found=' + found;
                     document.cookie = 'status=' + status;
                     document.cookie = 'code=' + code;
                     document.cookie = 'dateTime=' + retultat;
-                    console.log(dohvatiDioKolacaKojiTrebas("code"));
                 }    
             });
             
@@ -239,6 +238,7 @@ function provjeravanjeJasonDerulo() {
 }
 
 function ucitajRegu() {
+    console.log(document.cookie);
     let izraz = dohvatiDioKolacaKojiTrebas('name') != "" && 
                 dohvatiDioKolacaKojiTrebas('surname') != "" &&
                 dohvatiDioKolacaKojiTrebas('username') != "" &&
