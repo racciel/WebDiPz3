@@ -20,9 +20,11 @@
             
         }
     </style>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="./js/aleja.js" type="text/javascript"></script>
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="./js/aleja_jquery.js" type="text/javascript"></script>
 </head>
     <body id="tijelo">
         <header id="zaglavlje">
@@ -83,11 +85,10 @@
     
     <main>
 
-        
-        <table>
+        <table id="tabla" class="display" style="width: auto; text-align: center;">
         <caption>Osobnosti</caption>
         <thead>
-            <tr>
+            <tr id="glavaTablice">
                 <th>id korisnika</th>
                 <th>korisničko ime</th>
                 <th>tip</th>

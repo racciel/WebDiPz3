@@ -233,14 +233,16 @@ div {
 }
 
 table {
+    width: auto;
     margin: auto;
-    margin-top: 2%;
+    margin: 2%;
 }
 
 table, th, td {
     border: 2px solid gray;
     border-collapse: collapse;
 }
+
 
 #mala figure {
     margin: auto;

@@ -12,7 +12,6 @@
     <style>
         
         body{
-            overflow-x: hidden;
                 display: grid;
                 grid-template-areas: 
                     'zagl zagl zagl'
@@ -69,6 +68,10 @@
                 grid-area: sadr;
             }
             
+            iframe, video {
+                border: 0;
+            }
+
             footer {
                 grid-area: podn;
                 z-index: inherit;
@@ -77,7 +80,7 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="./js/aleja.js" type="text/javascript"></script>
+    <script src="./js/aleja_jquery.js" type="text/javascript"></script>
 </head>
     <body id="tijelo">
         <header id="zaglavlje">

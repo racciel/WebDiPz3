@@ -127,30 +127,25 @@ function ucitaj() {
 
         event.preventDefault();
     }
-
-
-
-
     });
 
 }
 
-// ovo nije odbrojavanje nego brojanje iz nekog JEBENOG razloga
-var minute = 10;
+var minute = 0;
 var sekunde = 0;
 
 var ispis = "";
 var timer;
 
 function pocetakVremena() {
-    if(minute == 0 && sekunde == 0){
-        minute = 10;
+    if(minute == 10){
+        minute = 0;
         sekunde = 0;
         osvjeziObrazac();
     }
-    if(sekunde<0){
-        sekunde = 59;
-        minute--;
+    if(sekunde > 59){
+        sekunde = 0;
+        minute++;
     }
     if(minute<10){
         ispis = "0" + minute + ":";
@@ -166,7 +161,7 @@ function pocetakVremena() {
         ispis += sekunde;
     }
     document.getElementById("vrijeme").innerHTML = ispis;
-    sekunde--;
+    sekunde++;
     timer = setTimeout("pocetakVremena()", 1000);
 }
 
@@ -253,81 +248,7 @@ function promijeniOrijentaciju() {
     }    
 }
 
-
-
-
-function ucitajMulimediju() {
-    const pretraga = $("#trazi");
-    $("#problem").hide();
-    pretraga.on('keyup', prijedlog);
-}
-
-
-function prijedlog() {
-    const pretraga = $("#trazi");
-    const problemMsg = $("#problem");
-
-    let izvor = [];
-
-    $.ajax({
-        type: "GET",
-        url: "./json/search.json",
-        contentType: "application/json",
-        dataType: "json",
-        success: function(odgovor){
-            for(let i = 0; i<odgovor.length; i++){
-                izvor.push(odgovor[i]);
-            }
-        },
-        error: function(odgovor){
-            console.log(odgovor);
-        }
-    });
-
-    pretraga.autocomplete({
-        source: izvor,
-      });
-
-    let svi = $("[title]");
-    let pogodak = false;
-
-    for(let i = 0; i < svi.length; i++){
-        if(svi[i].title.includes(pretraga.val())) {
-            svi[i].style = "display: block";
-            pogodak = true;
-        }
-        else{
-            svi[i].style = "display: none";
-        }
-    }
-
-    if(!pogodak) {
-        problemMsg.show();
-    }
-    else {
-        problemMsg.hide();
-    }
-
-}
-
-
-function ucitajPopis() {
-    // TREBA DORADITI
-    if($.cookie){
-
-    }
-    else {
-        
-    }
-
-}
-
-
 if(document['title'] == "Obrazac")
     document.addEventListener("DOMContentLoaded", ucitaj);
 
-if(document['title'] == "Multimedija")
-    document.addEventListener("DOMContentLoaded", ucitajMulimediju);
 
-if(document['title'] == "Popis")
-    document.addEventListener("DOMContentLoaded", ucitajPopis);
