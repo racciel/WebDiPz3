@@ -80,6 +80,10 @@ function ucitajPopis() {
                     let slika = $(this).find('image').text();
                     let kod = $(this).find('code').text();
 
+                    flogin = provjeriIzraz(flogin);
+                    blUntil = provjeriIzraz(blUntil);
+                    kod = provjeriIzraz(kod);
+
                     polje = [username, ime, prezime, lozinka, email];
                     let dohvaceno = username + ";" + prezime;
 
@@ -109,11 +113,15 @@ function ucitajPopis() {
     else {
         alert("fail");
     } 
-    
-
-    
-
 }
+
+function provjeriIzraz(izraz) {
+    if(izraz == ""){
+        return "Podatak ne postoji!";
+    }
+    return izraz;
+}
+
 
 function doradiZaglavlje() {
     $("#glavaTablice").append("<th>ime</th><th>prezime</th><th>lozinka</th><th>email</th><th>slika</th><th>kod</th>");
@@ -190,35 +198,44 @@ function odabraniDatumVrijeme(dohvaceno, aidi) {
 
 function provjeravanjeJasonDerulo() {
     let pogodak = false;
-    $.ajax({
-        type: "GET",
-        url: "../json/users.json",
-        contentType: "application/json",
-        dataType: "json",
-        success: function(odgovor){
-            for(let i = 0; i<odgovor.length; i++){
-                
-                if(odgovor[i]['username'] == dohvatiDioKolacaKojiTrebas('username') && odgovor[i]['email'] == dohvatiDioKolacaKojiTrebas('email')){
-                    console.log(odgovor[i]['password'] == $("#plozinka").val());
-                    if($("#plozinka").val() == odgovor[i]['password']){
-                        $("#imeiprezime").removeAttr("disabled");
-                        $("#mail").removeAttr("disabled");
-                        $("#korime").removeAttr("disabled");
-                        $("#lozinka").removeAttr("disabled");
-                    }
-                    else {
-                        $("#imeiprezime").attr("disabled", "disabled");
-                        $("#mail").attr("disabled", "disabled");
-                        $("#korime").attr("disabled", "disabled");
-                        $("#lozinka").attr("disabled", "disabled");
+    if(dohvatiDioKolacaKojiTrebas('username') != "" && dohvatiDioKolacaKojiTrebas('email') != ""){
+        $.ajax({
+            type: "GET",
+            url: "../json/users.json",
+            contentType: "application/json",
+            dataType: "json",
+            success: function(odgovor){
+                for(let i = 0; i<odgovor.length; i++){
+                    
+                    if(odgovor[i]['username'] == dohvatiDioKolacaKojiTrebas('username') && odgovor[i]['email'] == dohvatiDioKolacaKojiTrebas('email')){
+                        console.log(odgovor[i]['password'] == $("#plozinka").val());
+                        if($("#plozinka").val() == odgovor[i]['password']){
+                            $("#imeiprezime").removeAttr("disabled");
+                            $("#mail").removeAttr("disabled");
+                            $("#korime").removeAttr("disabled");
+                            $("#lozinka").removeAttr("disabled");
+                        }
+                        else {
+                            $("#imeiprezime").attr("disabled", "disabled");
+                            $("#mail").attr("disabled", "disabled");
+                            $("#korime").attr("disabled", "disabled");
+                            $("#lozinka").attr("disabled", "disabled");
+                        }
                     }
                 }
+            },
+            error: function(odgovor){
+                pogodak = false;
             }
-        },
-        error: function(odgovor){
-            pogodak = false;
-        }
-    });
+        });
+    }else {
+        // provjeri tekstualne
+        let reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i; //nezz sta je ovo
+        
+    
+
+        // provjeri lozinku
+    }
 }
 
 function ucitajRegu() {
@@ -235,8 +252,45 @@ function ucitajRegu() {
     }
 
     $("#plozinka").on('keyup', provjeravanjeJasonDerulo);
-
-
+    $("#rega").submit(function(e) {
+    if($("#lozinka").val() != $("#plozinka").val()){
+        alert("Lozinke se ne podudaraju!");
+        e.preventDefault();
+    }
+    else{
+        let imeprezime = $("#imeprezime").val();
+        imeprezime.split(" ");
+        let trazi = "username=" + $("#korime").val() + "&surname=" + imeprezime[1];
+        $.ajax({
+            url: "https://barka.foi.hr/WebDiP/2021/materijali/zadace/dz3/userNameSurname.php",
+            data: trazi,
+            dataType: "xml",
+            success : function(data) {
+                $(data).find('users').each(function (){
+                    let found = $(this).find('found').text();
+                    let status = $(this).find('status').text();
+                    let code = $(this).find('code').text();
+                    let dateTime = Date.parse($(this).find('dateTime').text());
+                    if(found == 0){
+                        document.cookie = 'name=' + imeprezime[0];
+                        document.cookie = 'surname=' + imeprezime[1];
+                        document.cookie = 'password=' + $("#lozinka").val();
+                        document.cookie = 'email='+$("#mail").val();
+                        document.cookie = 'it_type=3';
+                        document.cookie = 'id_status=-1';
+                        document.cookie = 'code=null';
+                    }
+                    else {
+                        document.cookie = 'found=' + found;
+                        document.cookie = 'status=' + status;
+                        document.cookie = 'code=' + code;
+                        document.cookie = 'dateTime=' + dateTime;
+                    }  
+                });
+            }
+        });
+    }
+    });
 }
 
 
