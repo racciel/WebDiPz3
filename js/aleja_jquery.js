@@ -174,15 +174,22 @@ function odabraniDatumVrijeme(dohvaceno, aidi) {
         success : function(data) {
             console.log(data);
             $(data).find('users').each(function (){
+                console.log(data);
                 let found = $(this).find('found').text();
                 let status = $(this).find('status').text();
                 let code = $(this).find('code').text();
                 let dateTime = Date.parse($(this).find('dateTime').text());
                 let retultat = new Date(dateTime);
+                
                 let dani = 0;
+
+                
+
                 if(found != 0){
                     dani = prompt("Unesite X dana!");
+                    dani = parseInt(dani);
                     retultat.setDate(retultat.getDate() + dani);
+
                     $("#"+aidi).html(retultat);
                     document.cookie = 'found=' + found;
                     document.cookie = 'status=' + status;
@@ -339,7 +346,6 @@ function ucitajRegu() {
                     let status = $(this).find('status').text();
                     let code = $(this).find('code').text();
                     let dateTime = Date.parse($(this).find('dateTime').text());
-                    alert(found);
                     if(found == 0){
                         document.cookie = 'name=' + polja[0];
                         document.cookie = 'surname=' + polja[1];
