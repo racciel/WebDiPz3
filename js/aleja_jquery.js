@@ -324,7 +324,7 @@ function ucitajRegu() {
         
     }
     else{
-        let imeprezime = $("#imeprezime").val();
+        let imeprezime = $("#imeiprezime").val();
         imeprezime.split(" ");
         let trazi = "username=" + $("#korime").val() + "&surname=" + imeprezime[1];
         $.ajax({
@@ -337,11 +337,14 @@ function ucitajRegu() {
                     let status = $(this).find('status').text();
                     let code = $(this).find('code').text();
                     let dateTime = Date.parse($(this).find('dateTime').text());
+                    alert(found);
                     if(found == 0){
+                    
+                        
                         document.cookie = 'name=' + imeprezime[0];
                         document.cookie = 'surname=' + imeprezime[1];
                         document.cookie = 'password=' + loz.val();
-                        document.cookie = 'email=' + mejl.val();
+                        document.cookie = 'email=' + imejl.val();
                         document.cookie = 'it_type=3';
                         document.cookie = 'id_status=-1';
                         document.cookie = 'code=null';
