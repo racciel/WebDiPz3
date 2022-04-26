@@ -222,22 +222,54 @@ function provjeravanjeJasonDerulo() {
                         }
                     }
                 }
-            },
-            error: function(odgovor){
-                pogodak = false;
             }
         });
     }else {
-        // provjeri tekstualne
-        let reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i; //nezz sta je ovo
-        
-    
-
-        // provjeri lozinku
+        provjeriIspravnostUnosa();  
     }
 }
 
+var polja = [false, false, false, false, false, false];
+
+function provjeriIspravnostUnosa() {
+    let nejm = $("#imeiprezime");
+    let dejt = $("#godinarod");
+    let imejl = $("#mail");
+    let krime = $("#korime");
+    let loz = $("#lozinka");
+    let ploz = $("#plozinka");
+
+    let re = /^[a-zA-Z][a-zA-Z_]*[a-zA-z0-9_ ]{0,23}$/gm;
+
+    polja[0] = nejm.val().match(re) == null || nejm.val() == "";
+    polja[1] = dejt.val() == "";
+    polja[2] = imejl.val() == "";
+    polja[3] = krime.val().match(re) == null || krime.val() == "";
+
+
+    // provjeri lozinku
+
+    let reLoz = /^(?!.*(.)\1)(?=.*\d{2})(?=.*[A-Z]{2})(?=.*[a-z]{2})(?=.*\d{2})(?=.*[!#$%&? "_]{2}).{15,50}$/;
+    polja[4] = loz.val().match(reLoz) == null || loz.val() == "";
+    if(loz.val() !== ploz.val()){
+        polja[5] = true;
+    }
+}
+
+
+
 function ucitajRegu() {
+
+    console.log($("#rega"));
+
+    let nejm = $("#imeiprezime");
+    let dejt = $("#godinarod");
+    let imejl = $("#mail");
+    let krime = $("#korime");
+    let loz = $("#lozinka");
+    let ploz = $("#plozinka");
+
+
     console.log(document.cookie);
     let izraz = dohvatiDioKolacaKojiTrebas('name') != "" && 
                 dohvatiDioKolacaKojiTrebas('surname') != "" &&
@@ -252,10 +284,44 @@ function ucitajRegu() {
     }
 
     $("#plozinka").on('keyup', provjeravanjeJasonDerulo);
+
+
     $("#rega").submit(function(e) {
-    if($("#lozinka").val() != $("#plozinka").val()){
-        alert("Lozinke se ne podudaraju!");
+    
+    polja = [false, false, false, false, false, false];
+    provjeriIspravnostUnosa();  
+    console.log(polja);
+    if(polja.includes(true)){
         e.preventDefault();
+        if(polja[0])
+            nejm.css("background-color", "red");
+        else
+            nejm.css("background-color", "");
+        if(polja[1])
+            dejt.css("background-color", "red");
+        else
+            dejt.css("background-color", "");
+        if(polja[2])
+            imejl.css("background-color", "red");
+        else
+            imejl.css("background-color", "");
+        if(polja[3])
+            krime.css("background-color", "red");
+        else
+            krime.css("background-color", "");
+        if(polja[5]){
+            loz.css("background-color", "red");
+            ploz.css("background-color", "red");
+        }
+        else {
+            loz.css("background-color", "");
+            ploz.css("background-color", "");
+        }
+        if(polja[4])
+            loz.css("background-color", "red");
+        else
+            loz.css("background-color", "");
+        
     }
     else{
         let imeprezime = $("#imeprezime").val();
@@ -274,8 +340,8 @@ function ucitajRegu() {
                     if(found == 0){
                         document.cookie = 'name=' + imeprezime[0];
                         document.cookie = 'surname=' + imeprezime[1];
-                        document.cookie = 'password=' + $("#lozinka").val();
-                        document.cookie = 'email='+$("#mail").val();
+                        document.cookie = 'password=' + loz.val();
+                        document.cookie = 'email=' + mejl.val();
                         document.cookie = 'it_type=3';
                         document.cookie = 'id_status=-1';
                         document.cookie = 'code=null';
@@ -292,8 +358,6 @@ function ucitajRegu() {
     }
     });
 }
-
-
 
 if(document['title'] == "Multimedija")
     document.addEventListener("DOMContentLoaded", ucitajMulimediju);
