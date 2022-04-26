@@ -276,7 +276,9 @@ function ucitajRegu() {
                 dohvatiDioKolacaKojiTrebas('username') != "" &&
                 dohvatiDioKolacaKojiTrebas('password') != "" &&
                 dohvatiDioKolacaKojiTrebas('email') != "";
-    if(izraz){
+
+    if(izraz) {
+
         $("#imeiprezime").val(dohvatiDioKolacaKojiTrebas('name') + " " + dohvatiDioKolacaKojiTrebas('surname')).attr("disabled", "disabled");
         $("#mail").val(dohvatiDioKolacaKojiTrebas('email')).attr("disabled", "disabled");
         $("#korime").val(dohvatiDioKolacaKojiTrebas('username')).attr("disabled", "disabled");
@@ -325,8 +327,8 @@ function ucitajRegu() {
     }
     else{
         let imeprezime = $("#imeiprezime").val();
-        imeprezime.split(" ");
-        let trazi = "username=" + $("#korime").val() + "&surname=" + imeprezime[1];
+        let polja = imeprezime.split(" ");
+        let trazi = "username=" + $("#korime").val() + "&surname=" + polja[1];
         $.ajax({
             url: "https://barka.foi.hr/WebDiP/2021/materijali/zadace/dz3/userNameSurname.php",
             data: trazi,
@@ -339,10 +341,8 @@ function ucitajRegu() {
                     let dateTime = Date.parse($(this).find('dateTime').text());
                     alert(found);
                     if(found == 0){
-                    
-                        
-                        document.cookie = 'name=' + imeprezime[0];
-                        document.cookie = 'surname=' + imeprezime[1];
+                        document.cookie = 'name=' + polja[0];
+                        document.cookie = 'surname=' + polja[1];
                         document.cookie = 'password=' + loz.val();
                         document.cookie = 'email=' + imejl.val();
                         document.cookie = 'it_type=3';
